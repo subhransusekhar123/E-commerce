@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import getProduct from "./thunk";
 
 const initialState = {
   product: [],
-  cart: []
+  cart: [], 
+  thunkSituation: "idle"
 };
 const cartSlice = createSlice({
   name: "cart",
@@ -17,6 +19,16 @@ const cartSlice = createSlice({
         return ele.id !== action.payload;
       });
     }
+  },
+  extraReducers:(build) => {
+    build.addCase(getProduct.pending, (state, action)=> {
+      state.thunkSituation = "loading"
+    })
+    build.addCase(getProduct.fulfilled, (state, action)=> {
+      state.thunkSituation = "idle"
+      state.product = action.payload
+    })
+    build.addCase(getProduct.rejected)
   }
 });
 

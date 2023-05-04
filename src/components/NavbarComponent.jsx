@@ -2,8 +2,8 @@ import React from "react";
 //bootstrap
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import { Nav } from "react-bootstrap/Nav";
-import { Link } from "react-router-dom";
+import  Nav  from "react-bootstrap/Nav";
+import {Link} from "react-router-dom";
 //useSelector
 
 import { useSelector } from "react-redux";
@@ -20,14 +20,14 @@ const NavbarComponent = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Navbar.Text>
-              <Nav.Link to="/" as={Link}>
+              <Link to="/">
                 Home
-              </Nav.Link>
+              </Link>
             </Navbar.Text>
             <Navbar.Text>
-              <Nav.Link to="/cart" as={Link}>
+              <Link to="/cart">
                 {`My Bag ${cartselector.length}`}
-              </Nav.Link>
+              </Link>
             </Navbar.Text>
           </Nav>
         </Navbar.Collapse>

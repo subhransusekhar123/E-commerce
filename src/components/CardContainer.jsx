@@ -6,21 +6,35 @@ import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import getProduct from "../slice/thunk";
 import { useSelector, useDispatch } from "react-redux";
+import NewSpinner from "./NewSpinner";
+
+
 
 const CardContainer = () => {
   const product = useSelector((state) => state.cartStore.product);
   console.log(product);
+  const dispatch = useDispatch();
+  const situation = useSelector(state => state.cartStore.thunkSituation);
 
-  useEffect(() => {}, []);
+
+
+  useEffect(() => {
+    dispatch(getProduct())
+  }, []);
   return (
     <Container>
-      <Row xs={1} md={2} lg={3}>
-        {product?.map((pro) => (
-          <Col>
-            <CardComponent {...pro} />
-          </Col>
-        ))}
-      </Row>
+      {
+        situation === "loading" &&
+        <NewSpinner /> ||
+        <Row xs={1} md={2} lg={3}>
+          {product.map((pro) => (
+            <Col>
+              <CardComponent {...pro} />
+            </Col>
+          ))}
+        </Row>
+      }
+
     </Container>
   );
 };
